@@ -6,20 +6,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
+email = os.getenv("EMAIL")
+domain = os.getenv("JIRA_DOMAIN")
+project_key = os.getenv("PROJECT_KEY")
 
-# Insert Domain, in this case io-link-manager
-url = "https://io-link-manager.atlassian.net/rest/api/3/search"
+url = f"https://{domain}.atlassian.net/rest/api/3/search"
 
-#Insert your e-mail and a generated API Token
-auth = HTTPBasicAuth("nathhess@gmail.com", api_key)
+auth = HTTPBasicAuth(email, api_key)
 
 headers = {
   "Accept": "application/json"
 }
 
-#Insert Project Key
 query = {
-  'jql': 'project = HELLO'
+  'jql': f'project = {project_key}'
 }
 
 response = requests.request(
